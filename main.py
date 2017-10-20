@@ -4,9 +4,13 @@ import menu, funciones,random
 # No tocar
 pygame.init()
 
-screen = pygame.display.set_mode((640,480))
+pantalla = pygame.display.set_mode((640,480))
+font_letra = pygame.font.SysFont("arial",30)
+
+funciones.inicializar(pantalla, font_letra)
+
 font = pygame.font.Font(os.path.join("data","maiden.TTF"),50)
-siguiente = menu.menu(screen, font)
+siguiente = menu.menu(pantalla, font)
 
 if not siguiente:
     exit()
@@ -18,9 +22,16 @@ lista = ["hola", "perro"]
 palabra = random.choice(lista)
 errores = 0
 
+funciones.definirPalabra(palabra, pygame)
+
 while True:
+    pantalla.fill((255, 255, 255))
+
     letra = funciones.obtenerLetra(pygame)
     if letra == "":
         continue
 
-    print(letra)
+    if letra in palabra:
+        funciones.agregarLetra(letra)
+
+    pygame.display.update()

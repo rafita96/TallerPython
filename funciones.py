@@ -1,4 +1,26 @@
+import pygame
 from pygame.locals import *
+
+palabra_completa = ""
+palabra_secreta = ""
+
+def inicializar(screen, fuente):
+    global font
+    global surface
+
+    surface = screen
+    font = fuente
+
+def definirPalabra(palabra, pygame):
+    global palabra_secreta
+    global palabra_completa
+
+    palabra_completa = palabra
+
+    palabra_secreta = "_"*len(palabra)
+    surface.fill((255, 255, 255))
+    surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
+    pygame.display.update()
 
 def getLetra(e):
     if e.key == K_a:
@@ -65,3 +87,21 @@ def obtenerLetra(pygame):
             return letra
     
     return ""
+
+def agregarLetra(letra):
+    global palabra_secreta
+
+    n = len(palabra_completa)
+    nueva = []
+    for x in palabra_secreta:
+        nueva.append(x)
+
+    for i in range(n):
+        if palabra_completa[i] == letra:
+            nueva[i] = letra
+
+    palabra_secreta = ""
+    for x in nueva:
+        palabra_secreta = palabra_secreta + x
+
+    surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
