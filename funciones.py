@@ -113,7 +113,7 @@ def dibujarAhorcado(error, screen):
 
        Arguments:
        error -- representa las veces que un usuario se equivocó.
-       screen -- la pantalla donde se dibujará.
+       screen -- la pantalla del juego
     """
     
     image = pygame.image.load(os.path.join('data', str(error) + ".jpg"))

@@ -2,9 +2,8 @@ import pygame, os
 from pygame.locals import *
 import menu, funciones,random
 # No tocar
-pygame.init()
-
-pantalla = pygame.display.set_mode((640,480))
+pygame.init() 
+pantalla = pygame.display.set_mode((640,480)) 
 font_letra = pygame.font.SysFont("arial",30)
 
 funciones.inicializar(pantalla, font_letra)
@@ -38,6 +37,7 @@ while True:
         if errores < 11:
             funciones.dibujarAhorcado(errores, pantalla)
         else:
-            funciones.dibujarAhorcado(10, pantalla)
+            loser = font.render("¡HAS PERDIDO!", True, (0, 0, 0))
+            pantalla.blit(loser, (80, 240))
 
     pygame.display.update()
