@@ -105,6 +105,7 @@ def agregarLetra(letra):
     for x in nueva:
         palabra_secreta = palabra_secreta + x
 
+def mostrarPalabra():
     surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
 
 def dibujarAhorcado(error, screen):

@@ -23,21 +23,32 @@ errores = 0
 
 funciones.definirPalabra(palabra, pygame)
 
-while True:
+while errores < 10:
     pantalla.fill((255, 255, 255))
 
     letra = funciones.obtenerLetra(pygame)
-    if letra == "":
-        continue
+    if errores > 0:
+        funciones.dibujarAhorcado(errores, pantalla)
+    
+    if letra != "":
 
-    if letra in palabra:
-        funciones.agregarLetra(letra)
-    else:
-        errores += 1
-        if errores < 11:
-            funciones.dibujarAhorcado(errores, pantalla)
+        if letra in palabra:
+            funciones.agregarLetra(letra)
         else:
-            loser = font.render("¡HAS PERDIDO!", True, (0, 0, 0))
-            pantalla.blit(loser, (80, 240))
+            errores += 1
 
+    funciones.mostrarPalabra()
+        
+
+    pygame.display.update()
+
+
+
+loser = font.render("HAS PERDIDO!", True, (0, 0, 0))
+while True:
+    pantalla.fill((255, 255, 255))
+    for e in pygame.event.get():
+        if e.type == QUIT: 
+            exit()
+    pantalla.blit(loser, (80, 240))
     pygame.display.update()
