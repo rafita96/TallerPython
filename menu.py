@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-def menu(screen):
+def menu(screen, font):
     image = pygame.Surface((50,50))
     image.fill((255,255,255))
     pygame.draw.polygon(image,(0,0,0),[(0,0),(0,50),(25,25)],5)

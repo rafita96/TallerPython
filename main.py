@@ -1,14 +1,26 @@
-import pygame
+import pygame, os
 from pygame.locals import *
-import inicio
+import menu, funciones,random
 # No tocar
 pygame.init()
 
 screen = pygame.display.set_mode((640,480))
-jugar = inicio.menu(screen)
+font = pygame.font.Font(os.path.join("data","maiden.TTF"),50)
+siguiente = menu.menu(screen, font)
 
-if not jugar:
+if not siguiente:
     exit()
-# No tocar
+# fin de no tocar
 
+# El usuario define su lista de palabras
+lista = ["hola", "perro"]
 
+palabra = random.choice(lista)
+errores = 0
+
+while True:
+    letra = funciones.obtenerLetra(pygame)
+    if letra == "":
+        continue
+
+    print(letra)
