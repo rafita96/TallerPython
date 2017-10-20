@@ -33,5 +33,11 @@ while True:
 
     if letra in palabra:
         funciones.agregarLetra(letra)
+    else:
+        errores += 1
+        if errores < 11:
+            funciones.dibujarAhorcado(errores, pantalla)
+        else:
+            funciones.dibujarAhorcado(10, pantalla)
 
     pygame.display.update()

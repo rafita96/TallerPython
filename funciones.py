@@ -1,4 +1,5 @@
 import pygame
+import os
 from pygame.locals import *
 
 palabra_completa = ""
@@ -105,3 +106,15 @@ def agregarLetra(letra):
         palabra_secreta = palabra_secreta + x
 
     surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
+
+def dibujarAhorcado(error, screen):
+    """Dibuja cada una de las partes del juego del ahorcado.
+       
+
+       Arguments:
+       error -- representa las veces que un usuario se equivocó.
+       screen -- la pantalla donde se dibujará.
+    """
+    
+    image = pygame.image.load(os.path.join('data', str(error) + ".jpg"))
+    screen.blit(image, (150, 200))
