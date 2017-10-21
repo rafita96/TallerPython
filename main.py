@@ -22,6 +22,7 @@ palabra = random.choice(lista)
 errores = 0
 
 funciones.definirPalabra(palabra, pygame)
+ganador = False 
 
 while errores < 10:
     pantalla.fill((255, 255, 255))
@@ -38,17 +39,21 @@ while errores < 10:
             errores += 1
 
     funciones.mostrarPalabra()
-        
 
     pygame.display.update()
 
+    if funciones.validarPalabra():
+        result = font.render("HAS GANADO!", True, (0, 0, 0))
+        ganador = True
+        break
 
-
-loser = font.render("HAS PERDIDO!", True, (0, 0, 0))
+if not ganador:
+    result = font.render("HAS PERDIDO!", True, (0, 0, 0))
 while True:
     pantalla.fill((255, 255, 255))
     for e in pygame.event.get():
         if e.type == QUIT: 
             exit()
-    pantalla.blit(loser, (80, 240))
+    funciones.mostrarPalabraCompleta(ganador)
+    pantalla.blit(result, (80, 240))
     pygame.display.update()

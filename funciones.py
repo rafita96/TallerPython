@@ -89,6 +89,14 @@ def obtenerLetra(pygame):
     
     return ""
 
+def validarPalabra():
+    global palabra_secreta
+    global palabra_completa
+
+    if palabra_completa == palabra_secreta:
+        return True
+    return False
+
 def agregarLetra(letra):
     global palabra_secreta
 
@@ -107,6 +115,16 @@ def agregarLetra(letra):
 
 def mostrarPalabra():
     surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
+
+def mostrarMensaje():
+    surface.blit(font.render(palabra_secreta,True,(0,0,0)),(200,100))
+
+def mostrarPalabraCompleta(var):
+    mensaje = "La palabra era: "
+    if var:
+        mensaje = "La palabra es: "
+    surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(200,100))
+
 
 def dibujarAhorcado(error, screen):
     """Dibuja cada una de las partes del juego del ahorcado.
