@@ -1,20 +1,31 @@
-import pygame
-import os
+import pygame, menu, random, os
 from pygame.locals import *
 
 palabra_completa = ""
 palabra_secreta = ""
 
-def inicializar(screen, fuente):
+def limpiarPantalla():
+    surface.fill((255, 255, 255))
+
+def inicializar():
+    pygame.init()
+
     global font
     global surface
+    global font_grande
 
-    surface = screen
-    font = fuente
+    surface = pygame.display.set_mode((640,480)) 
+    font = pygame.font.SysFont("arial",30)
 
-def definirPalabra(palabra, pygame):
+    font_grande = pygame.font.Font(os.path.join("data","maiden.TTF"),50)
+
+    menu.menu(surface, font_grande)
+
+def elegirPalabra(lista):
     global palabra_secreta
     global palabra_completa
+
+    palabra = random.choice(lista)
 
     palabra_completa = palabra
 
@@ -22,6 +33,8 @@ def definirPalabra(palabra, pygame):
     surface.fill((255, 255, 255))
     surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
     pygame.display.update()
+
+    return palabra
 
 def getLetra(e):
     if e.key == K_a:
@@ -79,7 +92,7 @@ def getLetra(e):
     else:
         return ""
 
-def obtenerLetra(pygame):
+def obtenerLetra():
     for e in pygame.event.get():
         if e.type == QUIT: 
             exit()
@@ -126,7 +139,7 @@ def mostrarPalabraCompleta(var):
     surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(200,100))
 
 
-def dibujarAhorcado(error, screen):
+def dibujarAhorcado(error):
     """Dibuja cada una de las partes del juego del ahorcado.
        
 
@@ -136,4 +149,31 @@ def dibujarAhorcado(error, screen):
     """
     
     image = pygame.image.load(os.path.join('data', str(error) + ".jpg"))
-    screen.blit(image, (150, 200))
+    surface.blit(image, (150, 200))
+
+def perdiste():
+    surface.blit(perdedor, (150, 200))
+
+def fin(ganador):
+
+    perdedor_msg = font_grande.render("HAS PERDIDO!", True, (0, 0, 0))
+    ganador_msg = font_grande.render("HAS GANADO!", True, (0, 0, 0))
+
+    while True:
+        limpiarPantalla()
+
+        for e in pygame.event.get():
+            if e.type == QUIT: 
+                exit()
+
+        mostrarPalabraCompleta(ganador)
+        
+        if ganador:
+            surface.blit(ganador_msg, (150, 200))
+        else:
+            surface.blit(perdedor_msg, (150, 200))
+
+        pygame.display.update()
+
+def actualizar():
+    pygame.display.update()

@@ -28,5 +28,5 @@ def menu(screen, font):
                     if pos == 1:
                         return True
                     elif pos == 2:
-                        return False
+                        exit()
         pygame.display.update()

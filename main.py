@@ -1,35 +1,22 @@
-import pygame, os
-from pygame.locals import *
-import menu, funciones,random
-# No tocar
-pygame.init() 
-pantalla = pygame.display.set_mode((640,480)) 
-font_letra = pygame.font.SysFont("arial",30)
-
-funciones.inicializar(pantalla, font_letra)
-
-font = pygame.font.Font(os.path.join("data","maiden.TTF"),50)
-siguiente = menu.menu(pantalla, font)
-
-if not siguiente:
-    exit()
+import funciones
+# No tocar 
+funciones.inicializar()
 # fin de no tocar
 
 # El usuario define su lista de palabras
 lista = ["hola", "perro"]
 
-palabra = random.choice(lista)
+palabra = funciones.elegirPalabra(lista)
 errores = 0
 
-funciones.definirPalabra(palabra, pygame)
 ganador = False 
 
-while errores < 10:
-    pantalla.fill((255, 255, 255))
+while not ganador and errores < 10:
+    funciones.limpiarPantalla()
 
-    letra = funciones.obtenerLetra(pygame)
+    letra = funciones.obtenerLetra()
     if errores > 0:
-        funciones.dibujarAhorcado(errores, pantalla)
+        funciones.dibujarAhorcado(errores)
     
     if letra != "":
 
@@ -40,20 +27,9 @@ while errores < 10:
 
     funciones.mostrarPalabra()
 
-    pygame.display.update()
+    funciones.actualizar()
 
     if funciones.validarPalabra():
-        result = font.render("HAS GANADO!", True, (0, 0, 0))
         ganador = True
-        break
 
-if not ganador:
-    result = font.render("HAS PERDIDO!", True, (0, 0, 0))
-while True:
-    pantalla.fill((255, 255, 255))
-    for e in pygame.event.get():
-        if e.type == QUIT: 
-            exit()
-    funciones.mostrarPalabraCompleta(ganador)
-    pantalla.blit(result, (80, 240))
-    pygame.display.update()
+funciones.fin(ganador)
