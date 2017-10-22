@@ -1,12 +1,6 @@
 import pygame, menu, random, os
 from pygame.locals import *
 
-palabra_completa = ""
-palabra_secreta = ""
-
-def limpiarPantalla():
-    surface.fill((255, 255, 255))
-
 def inicializar():
     pygame.init()
 
@@ -92,6 +86,9 @@ def getLetra(e):
     else:
         return ""
 
+def limpiarPantalla():
+    surface.fill((255, 255, 255))
+
 def obtenerLetra():
     for e in pygame.event.get():
         if e.type == QUIT: 
@@ -129,16 +126,6 @@ def agregarLetra(letra):
 def mostrarPalabra():
     surface.blit(font.render(palabra_secreta,True,(0,0,0)),(250,100))
 
-def mostrarMensaje():
-    surface.blit(font.render(palabra_secreta,True,(0,0,0)),(200,100))
-
-def mostrarPalabraCompleta(var):
-    mensaje = "La palabra era: "
-    if var:
-        mensaje = "La palabra es: "
-    surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(200,100))
-
-
 def dibujarAhorcado(error):
     """Dibuja cada una de las partes del juego del ahorcado.
        
@@ -151,8 +138,11 @@ def dibujarAhorcado(error):
     image = pygame.image.load(os.path.join('data', str(error) + ".jpg"))
     surface.blit(image, (150, 200))
 
-def perdiste():
-    surface.blit(perdedor, (150, 200))
+def mostrarPalabraCompleta(var):
+    mensaje = "La palabra era: "
+    if var:
+        mensaje = "La palabra es: "
+    surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(200,100))
 
 def fin(ganador):
 
