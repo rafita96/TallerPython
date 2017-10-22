@@ -142,12 +142,17 @@ def mostrarPalabraCompleta(var):
     mensaje = "La palabra era: "
     if var:
         mensaje = "La palabra es: "
-    surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(200,100))
+    surface.blit(font.render(mensaje+palabra_completa,True,(0,0,0)),(150,50))
 
 def fin(ganador):
 
     perdedor_msg = font_grande.render("HAS PERDIDO!", True, (0, 0, 0))
     ganador_msg = font_grande.render("HAS GANADO!", True, (0, 0, 0))
+
+    if ganador:
+        image = pygame.image.load(os.path.join('data', "ganador.jpg"))
+    else:
+        image = pygame.image.load(os.path.join('data', "perdedor.jpg"))
 
     while True:
         limpiarPantalla()
@@ -159,9 +164,11 @@ def fin(ganador):
         mostrarPalabraCompleta(ganador)
         
         if ganador:
-            surface.blit(ganador_msg, (150, 200))
+            surface.blit(ganador_msg, (150, 100))
         else:
-            surface.blit(perdedor_msg, (150, 200))
+            surface.blit(perdedor_msg, (150, 100))
+        
+        surface.blit(image, (150, 200))
 
         pygame.display.update()
 
